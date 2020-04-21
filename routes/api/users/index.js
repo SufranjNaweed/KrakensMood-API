@@ -181,12 +181,21 @@ router.delete('/delete/:user_id', auth ,async (req, res) => {
         if(!user){
             return res.status(400).json({msg : "There is no user for this id"});
         }
-        // return res.status(200).json(user);
-        console.log("req user data -> ", req.user.id)
-        if (req.params.user_id == req.user.id)
-            console.log('the same')
-        else
-            console.log('not the same')
+        const idFromURL = req.params.user_id;
+        const idFromJWT = req.user.id
+        // check if the user who ask for delete has the right to delete the account
+        if (idFromURL== idFromJWT) {            
+            const removingUser = await User.remove({_id : req.params.user_id})
+            // if successfully removed
+            if(removingUser)
+                return res.status(200).json({msg : "user has been delete ! " , info : "user id " + req.user.id})
+            else
+                return res.status(400).json({msg : "You cannot delete this user", info : "token_id doesnt match url_id"})
+        }
+        // if you don't have the right
+        else{
+            return res.status(400).json({msg : "You don't have any right on this account", info : "token_id doesnt match url_id"})
+        }
     }
     catch(err){
         console.log(err);

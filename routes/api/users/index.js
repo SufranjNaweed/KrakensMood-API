@@ -10,8 +10,17 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const auth = require("../../../middlewares/auth");
 const User = require("../../../models/User/index.js");
 
+// @route   Get api/users/
+// @desc    Get a user data
+// @access  Public
 router.get('/', async(req, res) => {
-    return res.status(200).send('give the list of users');
+    try{
+        const users = await User.find({})
+        return res.status(200).json({data : users});
+    }
+    catch(err){
+        console.log(err);
+    }
 })
 
 // @route   GET api/users/:user_id

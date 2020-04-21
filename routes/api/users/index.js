@@ -184,7 +184,7 @@ router.post('/register',
 // @desc    Delete a user
 // @access  Private
 
-router.delete('/delete/:user_id', auth ,async (req, res) => {
+router.delete('/delete/:user_id', auth, async (req, res) => {
     try {
         const user = await User.findById(req.params.user_id);
         if(!user){
@@ -218,3 +218,43 @@ router.delete('/delete/:user_id', auth ,async (req, res) => {
     }
 )
 module.exports = router;
+
+// @route   UPDATE api/users/:user_id
+// @desc    Update a user 
+// @acess   Private
+
+router.post('/update/:user_id', auth,
+            [
+                check('username', 'username  is require').not().isEmpty(),
+                check('email', 'Please include a valide email').isEmail()
+            ], 
+            async (req, res) => {
+                const errors = validationResult(req);
+                if (!errors.isEmpty()){
+                    return res
+                            .status(400)
+                            .json({errors : errors.array()});
+                }
+                try{
+                    const idFromURL = req.params.user_id;
+                    const idFromJWT = req.user.id
+                    const {username, email, avatar} = req.body;
+                    // check if the user who ask for delete has the right to delete the account
+                    if (idFromURL== idFromJWT) {            
+                        const removingUser = await User.findOneAndUpdate({_id : idFromJWT}, {username, email, avatar})
+                        // if successfully removed
+                        if(removingUser)
+                            return res.status(200).json({msg : "user has been update ! " , info : "user id " + req.user.id})
+                        else
+                            return res.status(400).json({msg : "You cannot update this user", info : "token_id doesnt match url_id"})
+                    }
+                    // if you don't have the right
+                    else{
+                        return res.status(400).json({msg : "You don't have any right on this account", info : "token_id doesnt match url_id"})
+                    }
+                }
+                catch(err){
+                    console.log(err);
+                }
+            }
+)

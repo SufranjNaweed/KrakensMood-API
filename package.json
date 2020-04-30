@@ -1,7 +1,7 @@
 {
-  "name": "tweetmeup-api",
+  "name": "moodmeup-api",
   "version": "1.0.0",
-  "description": "TweetMeUp - API",
+  "description": "MoodMeUp - API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SufranjNaweed/TweetMeUp-API.git"
+    "url": "git+https://github.com/SufranjNaweed/MoodMeUp-API.git"
   },
   "keywords": [
     "API",
-    "TweetMeUP",
+    "MoodMeUp",
     "OpenSources",
     "Sufranj",
     "Naweed"
@@ -22,9 +22,9 @@
   "author": "SUFRANJ Naweed",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SufranjNaweed/TweetMeUp-API/issues"
+    "url": "https://github.com/SufranjNaweed/MoodMeUp-API/issues"
   },
-  "homepage": "https://github.com/SufranjNaweed/TweetMeUp-API#readme",
+  "homepage": "https://github.com/SufranjNaweed/MoodMeUp-API#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "bcrypt": "^4.0.1",

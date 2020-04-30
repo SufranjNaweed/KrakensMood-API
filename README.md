@@ -1,5 +1,5 @@
-# TweetMeUP - API  
-Twitter like api 
+# MoodMeUp - API  
+Twitter like api & Mood Tracker 
 
 ## Prerequisite
 Make sure you have Node js v10 or higher and Npm v5 at least on your machine 

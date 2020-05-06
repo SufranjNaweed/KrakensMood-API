@@ -1,4 +1,4 @@
-# MoodMeUp - API  
+# KrakensMood - API  
 Twitter like api & Mood Tracker 
 
 ## Prerequisite
